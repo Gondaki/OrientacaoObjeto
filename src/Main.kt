@@ -1,83 +1,21 @@
 fun main() {
 
-    val produtos = mutableListOf<String>()
-    val precos = mutableListOf<Double>()
+    val ferrari = Carro(100.0, 0.0, 2, 5, 900, 80)
+    val mustang = Carro(120.0, 50.0, 7, 7, 950, 100)
+    val porsche = Carro(90.0, 10.0, 2, 3, 750, 50)
 
-    var opcao: Int
+    val habilidade1 = Habilidade("Turbo", 20)
+    val habilidade2 = Habilidade("Controle", 15)
+    val habilidade3 = Habilidade("Nitro", 25)
 
-    do {
-        println("\nMERCADINHO DO JOAO")
-        println("1 - Adicionar item")
-        println("2 - Remover item")
-        println("3 - Alterar preço")
-        println("4 - Listar produtos")
-        println("5 - Sair")
+    val piloto1 = Piloto("Joao", 18, habilidade1)
+    val piloto2 = Piloto("Carlos", 25, habilidade2)
+    val piloto3 = Piloto("Ana", 22, habilidade3)
 
-        opcao = readln().toInt()
+    val carros = listOf(ferrari, mustang, porsche)
+    val pilotos = listOf(piloto1, piloto2, piloto3)
 
-        when (opcao) {
-            1 -> adicionarProduto(produtos, precos)
-            2 -> removerProduto(produtos, precos)
-            3 -> alterarPreco(produtos, precos)
-            4 -> listarProdutos(produtos, precos)
-            5 -> println("Saindo...")
-            else -> println("Opção inválida!")
-        }
+    val corrida = Pista(carros, pilotos, voltas = 10, clima = "Ensolarado")
 
-    } while (opcao != 5)
+    corrida.iniciarCorrida()
 }
-
-fun adicionarProduto(produtos: MutableList<String>, precos: MutableList<Double>) {
-    println("Digite o nome do produto:")
-    val nome = readln()
-
-    println("Digite o preço:")
-    val preco = readln().toDouble()
-
-    produtos.add(nome)
-    precos.add(preco)
-
-    println("Produto adicionado com sucesso!")
-}
-
-fun removerProduto(produtos: MutableList<String>, precos: MutableList<Double>) {
-    println("Digite o nome do produto para remover:")
-    val nome = readln()
-
-    val index = produtos.indexOf(nome)
-
-    if (index != -1) {
-        produtos.removeAt(index)
-        precos.removeAt(index)
-        println("Produto removido!")
-    } else {
-        println("Produto não encontrado.")
-    }
-}
-
-fun alterarPreco(produtos: MutableList<String>, precos: MutableList<Double>) {
-    println("Digite o nome do produto:")
-    val nome = readln()
-
-    val index = produtos.indexOf(nome)
-
-    if (index != -1) {
-        println("Digite o novo preço:")
-        val novoPreco = readln().toDouble()
-        precos[index] = novoPreco
-        println("Preço atualizado!")
-    } else {
-        println("Produto não encontrado.")
-    }
-}
-
-fun listarProdutos(produtos: MutableList<String>, precos: MutableList<Double>) {
-    println("\nLISTA DE PRODUTOS:")
-    println("Quantidade de produtos: ${produtos.size}")
-
-    for (i in produtos.indices) {
-        println("${produtos[i]} - R$ ${precos[i]}")
-    }
-}
-
-
